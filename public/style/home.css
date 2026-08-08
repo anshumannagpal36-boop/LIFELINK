@@ -120,23 +120,12 @@ body {
     display: flex;
     flex-direction: column;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    /* Transition for smooth hover animation */
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-}
-
-/* Card Hover Effect */
-.card-grid .card:hover {
-    transform: translateY(-8px);
-    border-color: #38BDF8;
-    box-shadow: 0 12px 30px rgba(56, 189, 248, 0.25);
 }
 
 .card-grid .card-header {
     padding: 0;
     background: transparent;
     border: none;
-    overflow: hidden;
-    /* Prevents zoomed image from clipping outside card rounded corners */
 }
 
 .card-grid .card-header img {
@@ -144,12 +133,6 @@ body {
     height: 200px;
     object-fit: cover;
     display: block;
-    transition: transform 0.4s ease;
-}
-
-/* Image Zoom on Hover */
-.card-grid .card:hover .card-header img {
-    transform: scale(1.06);
 }
 
 .card-grid .card-body {
@@ -164,12 +147,6 @@ body {
     font-size: 1.25rem;
     font-weight: 600;
     margin: 0;
-    transition: color 0.3s ease;
-}
-
-/* Title Highlight on Card Hover */
-.card-grid .card:hover .card-title {
-    color: #38BDF8 !important;
 }
 
 .card-grid .card-text {
@@ -177,6 +154,60 @@ body {
     font-size: 0.95rem;
     line-height: 1.5;
     margin: 0;
+}
+
+/* --- KNOW US CLEANED CSS --- */
+.know-card {
+    background-color: rgba(30, 41, 59, 0.7) !important;
+    backdrop-filter: blur(8px);
+    border: 1px solid #334155;
+    border-radius: 20px;
+    padding: 25px 20px;
+    text-align: center;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.know-card:hover {
+    transform: translateY(-8px);
+    border-color: #38BDF8;
+    box-shadow: 0 12px 30px rgba(56, 189, 248, 0.25);
+}
+
+.know-avatar {
+    width: 120px !important;
+    height: 120px !important;
+    border-radius: 50% !important;
+    object-fit: cover;
+    margin: 0 auto 15px auto;
+    border: 3px solid #38BDF8;
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.know-card:hover .know-avatar {
+    transform: scale(1.08);
+    border-color: #60A5FA;
+}
+
+.know-subtitle {
+    color: #38BDF8 !important;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 8px;
+}
+
+.person-name {
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1.05rem;
+}
+
+.person-role,
+.person-institute {
+    color: #94a3b8;
+    font-size: 0.9rem;
 }
 
 /* Form Controls */
