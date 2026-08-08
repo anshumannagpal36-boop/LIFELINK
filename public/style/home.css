@@ -86,153 +86,89 @@ body {
 
 
 
-/* Dark Theme Section Background */
+/* Responsive Grid for Services Section */
 .card-section {
-    background: transparent;
-    padding: 5rem 1.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    padding: 20px 15px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-/* 4-Column Responsive Grid */
 .card-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
     max-width: 1200px;
-    width: 100%;
-}
-
-/* High-Contrast Dark Glassmorphism Card */
-.card {
-    background: rgba(15, 23, 42, 0.75);
-    /* Deep slate-black background */
-    border-radius: 16px;
-    overflow: hidden;
-    border: 1px solid rgba(56, 189, 248, 0.15);
-    /* Subtle glowing blue border */
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    /* Strong dark drop shadow */
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Neon Glow & Lift Effect on Hover */
-.card:hover {
-    transform: translateY(-8px);
-    border-color: #38bdf8;
-    /* Bright Cyan border on hover */
-    box-shadow: 0 12px 30px -4px rgba(56, 189, 248, 0.3),
-        0 0 15px rgba(56, 189, 248, 0.2);
-}
-
-/* Dark Card Top Image Header Container */
-.card-header {
-    background: #090d16;
-    height: 200px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    position: relative;
-}
-
-.card-header img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    /* Darkens images slightly to fit the dark theme mood, brightens on hover */
-    filter: brightness(0.9) contrast(1.05);
-    transition: filter 0.3s ease;
-}
-
-.card:hover .card-header img {
-    filter: brightness(1) contrast(1.1);
-}
-
-/* Dark Theme Typography */
-.card-body {
-    padding: 1.75rem 1.25rem;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-}
-
-.card-title {
-    color: white;
-    /* Pure white for high contrast */
-    font-size: 1.15rem;
-    font-weight: 600;
-    line-height: 1.4;
-    margin: 0 0 0.85rem 0;
-    letter-spacing: -0.01em;
-}
-
-/* Highlighted keywords inside titles if wrapped in <span> */
-.card-title span {
-    color: #38bdf8;
-}
-
-.card-text {
-    color: white;
-    /* Cool gray for readable body text */
-    font-size: 0.9rem;
-    line-height: 1.6;
-    margin: 0;
-}
-
-
-/* Center the grid container section */
-#cardsec {
-    display: flex;
-    justify-content: center;
-
-    align-items: center;
-    min-height: 100vh;
-    width: 100%;
-}
-
-/* Center the cards inside the grid layout */
-#cardgrid {
-    display: flex;
-    flex-wrap: wrap;
-    /* Allows stacking on smaller screens */
-    justify-content: center;
-    /* Center cards horizontally relative to each other */
-    align-items: center;
-    /* Center cards vertically relative to each other */
-    gap: 2rem;
-    /* Space between the cards */
-    max-width: 1200px;
-    /* Keeps layout contained on large screens */
     margin: 0 auto;
 }
 
-/* Align text and content inside each individual card */
-#card {
+/* Service Card Styling for High Contrast and Mobile Visibility */
+.card-grid .card {
+    background-color: #1e293b !important;
+    /* Dark solid background for visibility */
+    border: 1px solid #334155;
+    border-radius: 16px;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    /* Centers image and text horizontally inside card */
-    text-align: center;
-    /* Center-align text */
-    max-width: 400px;
-    /* Limits card width */
+    justify-content: space-between;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* Ensures images remain responsive and centered */
-#cardimg {
+.card-grid .card-header {
+    padding: 0;
+    background: transparent;
+    border: none;
+    overflow: hidden;
+}
+
+.card-grid .card-header img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
     display: block;
-    max-width: 150px;
-    height: auto;
-    margin: 0 auto 1rem auto;
+}
+
+.card-grid .card-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.card-grid .card-title {
+    color: #f8fafc !important;
+    /* Bright white text for readability */
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.card-grid .card-text {
+    color: #cbd5e1 !important;
+    /* Readable light gray text */
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+/* Ensure inputs/selects are visible on mobile */
+.card-grid .form-control,
+.card-grid .form-select {
+    background-color: #0f172a;
+    border: 1px solid #475569;
+    color: #ffffff;
+}
+
+.card-grid .form-control::placeholder {
+    color: #94a3b8;
+}
+
+.card-grid .form-control:focus,
+.card-grid .form-select:focus {
+    background-color: #0f172a;
+    color: #ffffff;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 0.25rem rgba(59, 130, 246, 0.25);
 }
 
 .form-control {
