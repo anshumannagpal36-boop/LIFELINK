@@ -1,67 +1,13 @@
+/* Base Styles */
 body {
-    background: linear-gradient(135deg,
-            #080b10 0%,
-            #0f172a 45%,
-            #1e1b4b 100%);
+    background: linear-gradient(135deg, #080b10 0%, #0f172a 45%, #1e1b4b 100%);
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    color: #ffffff;
 }
 
-.btn-outline-success {
-    color: #38BDF8;
-    border-color: #38BDF8;
-}
-
-.btn-outline-success:hover {
-    background: #38BDF8;
-    color: white;
-}
-
-
-#signup {
-    background: #2563EB;
-    color: white;
-    border: 1px solid #2563EB;
-    margin-left: 10px;
-    border-radius: 5px;
-}
-
-#signup:hover {
-    background: #60A5FA;
-    color: #0F172A;
-}
-
-#login-btn {
-    background: #2563EB;
-    color: white;
-    border: 1px solid #2563EB;
-    margin-left: 10px;
-    border-radius: 5px;
-}
-
-#login-btn:hover {
-    background: #60A5FA;
-    color: #0F172A;
-}
-
-
-
-#admin {
-    background: #0d6efd;
-    color: white;
-    height: 40px;
-    text-decoration: none;
-    border: 1px solid #60A5FA;
-    border-radius: 5px;
-    text-align: center;
-    cursor: pointer;
-    padding-top: 6px;
-    margin-left: 10px;
-}
-
-#admin:hover {
-    background: #0b5ed7;
-    color: white;
-}
-
+/* Navbar */
 .navbar {
     height: 80px;
     padding: 0 1.5rem;
@@ -81,27 +27,91 @@ body {
     width: 100px;
     height: 100px;
     object-fit: contain;
-
 }
 
+/* Navbar Buttons */
+.btn-outline-success {
+    color: #38BDF8;
+    border-color: #38BDF8;
+}
 
+.btn-outline-success:hover {
+    background: #38BDF8;
+    color: white;
+}
 
-/* --- OUR SERVICES SECTION ONLY --- */
+#signup,
+#login-btn {
+    background: #2563EB;
+    color: white;
+    border: 1px solid #2563EB;
+    margin-left: 10px;
+    border-radius: 5px;
+}
+
+#signup:hover,
+#login-btn:hover {
+    background: #60A5FA;
+    color: #0F172A;
+}
+
+#admin {
+    background: #0d6efd;
+    color: white;
+    height: 40px;
+    text-decoration: none;
+    border: 1px solid #60A5FA;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    padding-top: 6px;
+    margin-left: 10px;
+}
+
+#admin:hover {
+    background: #0b5ed7;
+    color: white;
+}
+
+/* Global Section Titles Spacing Fix */
+.section-title {
+    text-align: center;
+    width: 100%;
+    margin-top: 60px !important;
+    margin-bottom: 25px !important;
+    clear: both;
+}
+
+.section-title h1,
+.section-title h2 {
+    color: #ffffff !important;
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.section-title p {
+    color: #64748b;
+    font-size: 1rem;
+    margin-top: 6px;
+}
+
+/* --- OUR SERVICES SECTION --- */
 .card-section {
-    padding: 20px 15px;
+    padding: 0 15px 40px 15px;
     width: 100%;
     box-sizing: border-box;
+    clear: both;
 }
 
 .card-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
+    gap: 25px;
     max-width: 1200px;
     margin: 0 auto;
 }
 
-/* Scoped selector: ONLY affects cards inside .card-grid */
 .card-grid .card {
     background-color: #1e293b !important;
     border: 1px solid #334155;
@@ -129,60 +139,52 @@ body {
     padding: 20px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
 }
 
 .card-grid .card-title {
     color: #f8fafc !important;
     font-size: 1.25rem;
     font-weight: 600;
+    margin: 0;
 }
 
 .card-grid .card-text {
     color: #cbd5e1 !important;
     font-size: 0.95rem;
     line-height: 1.5;
+    margin: 0;
 }
 
-.card-grid .form-control,
-.card-grid .form-select {
-    background-color: #0f172a;
-    border: 1px solid #475569;
-    color: #ffffff;
-}
-
-.card-grid .form-control::placeholder {
-    color: #94a3b8;
-}
-
-
-/* --- KNOW US SECTION STYLING (Independent) --- */
+/* --- KNOW US SECTION --- */
 .know-us-section {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 20px;
-    padding: 40px 15px;
+    gap: 25px;
+    padding: 0 15px 40px 15px;
     max-width: 1100px;
     margin: 0 auto;
+    clear: both;
 }
 
 .know-us-card {
-    background-color: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    background-color: #1e293b;
+    border: 1px solid #334155;
     border-radius: 16px;
-    padding: 20px;
+    padding: 25px;
     max-width: 480px;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
+    box-sizing: border-box;
 }
 
 .know-us-card img {
-    width: 130px;
-    height: 130px;
+    width: 120px;
+    height: 120px;
     object-fit: cover;
     border-radius: 35%;
     margin-bottom: 15px;
@@ -190,7 +192,7 @@ body {
 
 .know-us-card .card-title {
     color: #94a3b8 !important;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     margin-bottom: 10px;
 }
 
@@ -200,7 +202,9 @@ body {
     line-height: 1.6;
 }
 
-.form-control {
+/* Form Controls */
+.form-control,
+.form-select {
     background: rgba(255, 255, 255, 0.08);
     border: 1px solid rgba(148, 163, 184, 0.3);
     color: white;
@@ -212,14 +216,16 @@ body {
     color: #94a3b8;
 }
 
-.form-control:focus {
+.form-control:focus,
+.form-select:focus {
     background: rgba(255, 255, 255, 0.1);
     color: white;
     border-color: #38BDF8;
     box-shadow: 0 0 0 0.2rem rgba(56, 189, 248, 0.15);
 }
 
-.form-control option {
+.form-control option,
+.form-select option {
     background: #111827;
     color: white;
 }
