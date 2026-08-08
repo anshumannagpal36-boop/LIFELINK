@@ -120,12 +120,23 @@ body {
     display: flex;
     flex-direction: column;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    /* Transition for smooth hover animation */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* Card Hover Effect */
+.card-grid .card:hover {
+    transform: translateY(-8px);
+    border-color: #38BDF8;
+    box-shadow: 0 12px 30px rgba(56, 189, 248, 0.25);
 }
 
 .card-grid .card-header {
     padding: 0;
     background: transparent;
     border: none;
+    overflow: hidden;
+    /* Prevents zoomed image from clipping outside card rounded corners */
 }
 
 .card-grid .card-header img {
@@ -133,6 +144,12 @@ body {
     height: 200px;
     object-fit: cover;
     display: block;
+    transition: transform 0.4s ease;
+}
+
+/* Image Zoom on Hover */
+.card-grid .card:hover .card-header img {
+    transform: scale(1.06);
 }
 
 .card-grid .card-body {
@@ -147,6 +164,12 @@ body {
     font-size: 1.25rem;
     font-weight: 600;
     margin: 0;
+    transition: color 0.3s ease;
+}
+
+/* Title Highlight on Card Hover */
+.card-grid .card:hover .card-title {
+    color: #38BDF8 !important;
 }
 
 .card-grid .card-text {
@@ -154,52 +177,6 @@ body {
     font-size: 0.95rem;
     line-height: 1.5;
     margin: 0;
-}
-
-/* --- KNOW US SECTION --- */
-.know-us-section {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 25px;
-    padding: 0 15px 40px 15px;
-    max-width: 1100px;
-    margin: 0 auto;
-    clear: both;
-}
-
-.know-us-card {
-    background-color: #1e293b;
-    border: 1px solid #334155;
-    border-radius: 16px;
-    padding: 25px;
-    max-width: 480px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    box-sizing: border-box;
-}
-
-.know-us-card img {
-    width: 120px;
-    height: 120px;
-    object-fit: cover;
-    border-radius: 35%;
-    margin-bottom: 15px;
-}
-
-.know-us-card .card-title {
-    color: #94a3b8 !important;
-    font-size: 1.3rem;
-    margin-bottom: 10px;
-}
-
-.know-us-card .card-text {
-    color: #cbd5e1 !important;
-    font-size: 0.95rem;
-    line-height: 1.6;
 }
 
 /* Form Controls */
