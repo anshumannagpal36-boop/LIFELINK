@@ -1,0 +1,212 @@
+body {
+    background: linear-gradient(135deg, #09090B, #111827, #1E1B4B);
+    min-height: 100vh;
+    color: white;
+}
+
+/* ===========================
+   Heading
+=========================== */
+
+.main-heading {
+    text-align: center;
+    color: #1d4ed8;
+    font-size: 40px;
+    font-weight: 700;
+}
+
+.title-divider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    margin-top: 12px;
+    margin-bottom: 40px;
+}
+
+.title-divider .line {
+    width: 120px;
+    height: 3px;
+    background: linear-gradient(to right, #2563eb, #60a5fa);
+    border-radius: 20px;
+}
+
+.title-divider i {
+    font-size: 28px;
+    color: #2563eb;
+}
+
+/* ===========================
+   Main Card
+=========================== */
+
+.medicine-card {
+
+    background: #141B2D;
+    border: 1px solid rgba(79, 70, 229, .5);
+    border-radius: 25px;
+    padding: 40px;
+    margin-bottom: 50px;
+    box-shadow: 0 0 35px rgba(0, 0, 0, .35);
+
+}
+
+/* ===========================
+   Left Upload Box
+=========================== */
+
+.image-box {
+
+    background: transparent;
+
+    border: 2px dashed #60a5fa;
+
+    border-radius: 20px;
+
+    text-align: center;
+
+    padding: 30px;
+
+    height: 100%;
+}
+
+.image-box h5 {
+
+    color: #2563eb;
+
+    font-weight: 600;
+
+    margin-bottom: 20px;
+}
+
+#prev {
+
+    width: 220px;
+
+    height: 220px;
+
+    border-radius: 18px;
+
+    object-fit: cover;
+
+    border: 3px solid #2563eb;
+
+    background: transparent;
+
+    box-shadow: 0 10px 25px rgba(37, 99, 235, .15);
+}
+
+/* ===========================
+   Labels
+=========================== */
+
+label {
+
+    font-weight: 600;
+
+    color: white;
+
+    margin-bottom: 8px;
+
+    display: block;
+}
+
+/* ===========================
+   Inputs
+=========================== */
+
+.form-control,
+.form-select {
+
+    height: 50px;
+
+    border-radius: 12px;
+
+    border: 1px solid #cbd5e1;
+
+    transition: .3s;
+}
+
+.form-control:focus,
+.form-select:focus {
+
+    border-color: #2563eb;
+
+    box-shadow: 0 0 10px rgba(37, 99, 235, .18);
+}
+
+/* ===========================
+   Icons
+=========================== */
+
+.input-group-text {
+
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+
+    color: white;
+
+    border: none;
+
+    border-radius: 12px 0 0 12px;
+}
+
+/* ===========================
+   Upload Button
+=========================== */
+
+input[type=file] {
+
+    border-radius: 12px;
+}
+
+/* ===========================
+   Submit Button
+=========================== */
+
+.gradient-btn {
+
+    background: linear-gradient(135deg, #2563eb, #4338ca);
+
+    color: white;
+
+    border: none;
+
+    border-radius: 14px;
+
+    padding: 14px 45px;
+
+    font-size: 18px;
+
+    font-weight: 600;
+
+    transition: .3s;
+}
+
+.gradient-btn:hover {
+
+    transform: translateY(-3px);
+
+    box-shadow: 0 15px 30px rgba(37, 99, 235, .30);
+
+    color: white;
+}
+
+.image-box img {
+    width: 230px;
+    height: 300px;
+    object-fit: contain;
+    border: 2px solid #164b9b;
+    padding: 5px;
+}
+.logo {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+
+}
+
+.navbar {
+    height: 80px;
+    padding: 0;
+    margin-left: -100px;
+}

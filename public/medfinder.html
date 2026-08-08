@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link rel="stylesheet" href="style/medfind.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <script>
+        let myModule = angular.module("mouduleKuch", []);
+        let myController = myModule.controller("controllerKuch", function ($scope, $http) {
+            $scope.doShowAllcity = function () {
+                let url = "/fetch-distinct-city";
+                $http.get(url).then(function (resp) {
+                    $scope.jsonArraycity = resp.data;
+                }, function (err) {
+                    alert(err);
+                });
+            }
+            $scope.doFetchMed = function () {
+                let city = $scope.selCity;
+                let url = "/fetch-med?city=" + city;
+                $http.get(url).then(
+                    function (resp) {
+                        // alert(JSON.stringify(resp.data))
+                        $scope.jsonArrayMed = resp.data;
+                    },
+                    function (err) {
+                        alert(err);
+                    },
+                );
+            };
+
+            $scope.ShowMedDetails = function () {
+                let city = $scope.selCity;
+                let medname = $scope.selMed;
+                let url = "/show_med_full?city=" + city + "&medname=" + medname;
+                $http.get(url).then(
+                    function (resp) {
+                        // alert(JSON.stringify(resp.data));
+                        $scope.jsonArrayMedDetails = resp.data;
+                    },
+                    function (err) {
+                        alert(err);
+                    },
+                );
+            };
+
+            $scope.doShowDetails = function (obj) {
+                $scope.DonorObj = obj;
+                // alert(JSON.stringify($scope.DonorObj));
+            }
+        });
+    </script>
+</head>
+
+<body ng-app="mouduleKuch" ng-controller="controllerKuch" ng-init="doShowAllcity()">>
+
+    <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
+        </script>
+
+    <br><br>
+    <center>
+        <div style="color: white;">
+            <h1>
+                <i class="fa-solid fa-magnifying-glass"></i>
+                Find Medicine
+            </h1>
+
+            <p>
+                Search for available medicines and find donors near you.
+            </p>
+    </center>
+    </div>
+
+
+    <br><br>
+    <div class="container">
+        <div class="row align-items-center text-white">
+            <div class="col-md-4">
+                <label for="City" class="form-label">City name</label>
+                <input list="city-list" ng-model="selCity" placeholder="Type yout city name" class="form-control"
+                    ng-blur="doFetchMed()" />
+                <datalist id="city-list">
+                    <option ng-repeat="obj in jsonArraycity" value="{{obj.City}}"></option>
+                </datalist>
+            </div>
+            <div class="col-md-4">
+                <label for="Med_name" class="form-label">Medicine Available in your city</label>
+                <input list="med-list" ng-model="selMed" placeholder="Type med name to find" class="form-control" />
+                <datalist id="med-list">
+                    <option ng-repeat="obj in jsonArrayMed" value="{{obj.med_name}}"></option>
+                </datalist>
+            </div>
+            <div class="col-md-4">
+                <br />
+                <input type="button" class="form-control " aria-describedby="emailHelp" value="Search Medicines"
+                    ng-click="ShowMedDetails()" />
+            </div>
+        </div>
+
+        <p><br /><br /></p>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3" ng-repeat="obj in jsonArrayMedDetails">
+                    <div class="card">
+                        <img src="{{obj.pic_path}}" class="card-img-top" height="180" style="background-size: contain"
+                            alt="..." />
+                        <div class="card-body">
+                            <h5 class="card-title">Medicine Details</h5>
+                            <p class="card-text">Medicine name:{{obj.med_name}}</p>
+                            <p class="card-text">Expity Date:{{obj.date_of_expery| date:'dd-MMM-yyyy'}}</p>
+                            <p class="card-text">Company:{{obj.company}}</p>
+                            <p class="card-text">Packing:{{obj.packing}}</p>
+                            <p class="card-text">Quantity:{{obj.quty}}</p>
+                            <p class="card-text">Info:{{obj.other_info}}</p>
+                            <hr />
+                            <div class="text-center">
+                                <a href="#" class="btn btn-primary" ng-click="doShowDetails(obj)" data-bs-toggle="modal"
+                                    data-bs-target="#modalDonorDetail">Donor Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="modalDonorDetail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Donor Details</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    EmailId:{{DonorObj.email}}<br>
+                    Mobile No:{{DonorObj.Mobile_no}}<br>
+                    Name:{{DonorObj.name_}}<br>
+                    City:{{DonorObj.City}}<br>
+                    Address:{{DonorObj.Address}}<br>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

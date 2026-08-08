@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NGO Registration</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+
+    <link rel="stylesheet" href="style/Ngo.css">
+
+    <script>
+        function showPreview(fileCtrl) {
+            const file = fileCtrl.files[0];
+
+            if (file) {
+                document.getElementById("prev").src =
+                    URL.createObjectURL(file);
+            }
+        }
+    </script>
+    <script>
+        function setemail() {
+            document.getElementById("email").value = localStorage.getItem("activeuser");
+
+        }
+    </script>
+</head>
+
+<body onload="setemail()">
+    <div class="container-fluid mt-4">
+
+        <h1 class="main-heading">
+            NGO Profile
+        </h1>
+
+        <div class="title-divider">
+            <span class="line"></span>
+            <i class="fa-solid fa-capsules"></i>
+            <span class="line"></span>
+        </div>
+
+    </div>
+
+
+    <div class="container medicine-card">
+
+        <form action="/NGO-register" method="post" enctype="multipart/form-data">
+
+            <div class="row">
+
+                <!-- LEFT SIDE -->
+
+                <div class="col-lg-4">
+
+                    <div class="image-box">
+
+                        <h5 class="mb-3">
+                            REG. Proof
+                        </h5>
+
+                        <img src="images/upload.png" id="prev">
+
+                        <input type="file" class="form-control mt-4" name="Proof" onchange="showPreview(this)">
+
+                    </div>
+
+                </div>
+
+
+                <!-- RIGHT SIDE -->
+
+                <div class="col-lg-8">
+
+                    <div class="row">
+
+                        <div class="col-md-12 mb-4">
+
+                            <label>Email ID</label>
+
+                            <div class="input-group">
+
+                                <span class="input-group-text">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </span>
+
+                                <input type="email" class="form-control custom-input" placeholder="Enter email"
+                                    id="email" name="email" readonly>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="col-md-3 mb-4">
+
+                            <label>NGO Name</label>
+
+                            <div class="input-group">
+
+
+                                <input type="text" class="form-control" name="NGO" id="NGO">
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="col-md-6 mb-4">
+
+                            <label>REG. Office</label>
+
+                            <input type="text" class="form-control" name="Office" id="Office">
+
+                        </div>
+
+
+
+                        <div class="col-md-3 mb-4">
+
+                            <label>City</label>
+
+                            <input type="text" class="form-control" name="City" id="City">
+
+                        </div>
+
+                        <div class="col-md-6 mb-4">
+
+                            <label>WEBSITE</label>
+
+                            <div class="input-group">
+
+                                <input type="text" class="form-control" name="web" id="web">
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-3 mb-4">
+
+                            <label>Contact Number</label>
+
+                            <input type="text" class="form-control" name="no" id="no">
+
+                        </div>
+                        <div class="col-md-3 mb-4">
+
+                            <label>Since</label>
+
+                            <input type="date" class="form-control" name="since" id="since">
+
+                        </div>
+
+
+
+                        <div class="col-md-5 mb-4">
+
+                            <label>Chair Person</label>
+
+                            <input type="text" class="form-control" name="chair" id="chair">
+
+                        </div>
+
+
+
+                        <div class="col-md-6 mb-4">
+
+                            <label>NGO Profile/Works</label>
+
+                            <input type="text" class="form-control" name="work" id="work">
+
+                        </div>
+
+
+
+                        <div class="col-md-8 mb-4">
+
+                            <label>Registration Number</label>
+                            <input type="text" class="form-control" name="no1" id="no1">
+
+
+                        </div>
+
+
+
+                        <div class="col-12 text-center mt-3">
+                            <input type="submit" class="gradient-btn" value=" Register Now" id="btn" name="btn">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

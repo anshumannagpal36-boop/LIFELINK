@@ -1,0 +1,61 @@
+#Signup{
+      width: 400px;
+    height: 300px;
+    background-color: transparent;
+    margin: auto;
+    margin-top: 10%;
+    border-radius: 10px;
+   
+    padding: 10px;
+}
+#image{
+    border: 1px black solid;
+    width: 80px;height: 80px;
+    margin: auto;
+    margin-top: 3%;
+    border-radius: 10px;
+    background-image: url(img/admininfo.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: #F0F8FF;
+     
+}
+.box{
+    width: 360px;
+    height: 25px;
+    margin-top: 10px;
+    padding-top: 8px;
+    color: white;
+   
+}
+.box span{
+    width: 170px;      /* Same width for all labels */
+    color: white;
+}
+.box .user-select{
+    width: 200px;
+    margin-top: 10px;      /* Same width as email/password */
+    background-color: white;
+    color: #333333;
+}
+
+input[type="email"]{
+    border: 0px;
+    outline: none;
+    color: #333333;
+    text-align: center;
+    width: 200px;
+    background-color: white;
+    margin-left: 19px;
+   
+}
+input[type="password"]{
+    border: 0px;
+    outline: none;
+    color: #333333;
+    text-align: center;
+    background-color: white;margin-left: 18px;
+    width: 200px;
+}
+
+

@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Find Equipment</title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style/medfind.css">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- AngularJS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <script>
+
+        let myModule = angular.module("mouduleKuch", []);
+
+        let myController = myModule.controller(
+            "controllerKuch",
+            function ($scope, $http) {
+
+                // Fetch all cities
+                $scope.doShowAllcity = function () {
+
+                    let url = "/fetch-distinct-city1";
+
+                    $http.get(url).then(
+
+                        function (resp) {
+                            $scope.jsonArraycity = resp.data;
+                        },
+
+                        function (err) {
+                            alert("Error while fetching cities");
+                            console.log(err);
+                        }
+
+                    );
+                };
+
+
+                // Fetch equipment according to city
+                $scope.doFetchequ = function () {
+
+                    let city = $scope.selCity;
+
+                    if (!city) {
+                        return;
+                    }
+
+                    let url = "/fetch-equ?city=" + city;
+
+                    $http.get(url).then(
+
+                        function (resp) {
+                            $scope.jsonArrayequ = resp.data;
+                        },
+
+                        function (err) {
+                            alert("Error while fetching equipment");
+                            console.log(err);
+                        }
+
+                    );
+                };
+
+
+                // Show equipment details
+                $scope.ShowequDetails = function () {
+
+                    let city = $scope.selCity;
+                    let equname = $scope.selequ;
+
+                    if (!city || !equname) {
+                        alert("Please select City and Equipment");
+                        return;
+                    }
+
+                    let url =
+                        "/show_equ_full?city="
+                        + city
+                        + "&equname="
+                        + equname;
+
+                    $http.get(url).then(
+
+                        function (resp) {
+
+                            $scope.jsonArrayequDetails = resp.data;
+
+                            if ($scope.jsonArrayequDetails.length == 0) {
+                                alert("No equipment found");
+                            }
+
+                        },
+
+                        function (err) {
+
+                            alert("Error while fetching equipment details");
+                            console.log(err);
+
+                        }
+
+                    );
+                };
+
+
+                // Show donor details in modal
+                $scope.doShowDetails = function (obj) {
+
+                    $scope.DonorObj = obj;
+
+                };
+
+            }
+
+        );
+
+    </script>
+
+</head>
+
+
+<body ng-app="mouduleKuch" ng-controller="controllerKuch" ng-init="doShowAllcity()">
+
+
+
+    <!-- Page Heading -->
+
+    <section class="text-center text-white mt-5">
+
+        <h1>
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            Find Equipment
+
+        </h1>
+
+        <p>
+
+            Search for available equipment and find donors near you.
+
+        </p>
+
+    </section>
+
+
+    <!-- Search Section -->
+
+    <div class="container mt-5">
+
+        <div class="row align-items-end g-4 text-white">
+
+
+            <!-- City -->
+
+            <div class="col-md-4">
+
+                <label class="form-label">
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                    City Name
+
+                </label>
+
+
+                <input list="city-list" ng-model="selCity" ng-blur="doFetchequ()" placeholder="Type your city name"
+                    class="form-control">
+
+
+                <datalist id="city-list">
+
+                    <option ng-repeat="obj in jsonArraycity" value="{{obj.City}}">
+
+                    </option>
+
+                </datalist>
+
+            </div>
+
+
+            <!-- Equipment -->
+
+            <div class="col-md-4">
+
+                <label class="form-label">
+
+                    <i class="fa-solid fa-toolbox"></i>
+
+                    Equipment Available
+
+                </label>
+
+
+                <input list="equ-list" ng-model="selequ" placeholder="Type equipment name" class="form-control">
+
+
+                <datalist id="equ-list">
+
+                    <option ng-repeat="obj in jsonArrayequ" value="{{obj.type}}">
+
+                    </option>
+
+                </datalist>
+
+            </div>
+
+
+            <!-- Search Button -->
+
+            <div class="col-md-4">
+
+                <button class="btn btn-primary w-100" ng-click="ShowequDetails()">
+
+                    <i class="fa-solid fa-search"></i>
+
+                    Search Equipment
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- Equipment Cards -->
+
+        <div class="row mt-5 g-4">
+
+
+            <div class="col-lg-3 col-md-4 col-sm-6" ng-repeat="obj in jsonArrayequDetails">
+
+
+                <div class="card h-100 shadow">
+
+
+                    <!-- Equipment Image -->
+
+                    <img ng-src="{{obj.pic1_path}}" class="card-img-top" height="180" style="object-fit: contain;"
+                        alt="Equipment Image">
+
+
+                    <div class="card-body">
+
+
+                        <h5 class="card-title">
+
+                            <i class="fa-solid fa-toolbox"></i>
+
+                            {{obj.type}}
+
+                        </h5>
+
+
+                        <p class="card-text">
+
+                            <b>For:</b>
+
+                            {{obj.status_}}
+
+                        </p>
+
+
+                        <p class="card-text">
+
+                            <b>Amount:</b>
+
+                            {{obj.Amount}}
+
+                        </p>
+
+
+                        <p class="card-text">
+
+                            <b>Information:</b>
+
+                            {{obj.other_info}}
+
+                        </p>
+
+
+                        <hr>
+
+
+                        <div class="text-center">
+
+                            <button class="btn btn-primary" ng-click="doShowDetails(obj)" data-bs-toggle="modal"
+                                data-bs-target="#modalDonorDetail">
+
+                                <i class="fa-solid fa-user"></i>
+
+                                Donor Details
+
+                            </button>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- Donor Details Modal -->
+
+    <div class="modal fade" id="modalDonorDetail" tabindex="-1" aria-hidden="true">
+
+
+        <div class="modal-dialog modal-dialog-centered">
+
+
+            <div class="modal-content">
+
+
+                <div class="modal-header">
+
+                    <h5 class="modal-title">
+
+                        <i class="fa-solid fa-user"></i>
+
+                        Donor Details
+
+                    </h5>
+
+
+                    <button type="button" class="btn-close" data-bs-dismiss="modal">
+
+                    </button>
+
+                </div>
+
+
+                <div class="modal-body">
+
+
+                    <div class="mb-3">
+
+                        <i class="fa-solid fa-envelope"></i>
+
+                        <b>Email:</b>
+
+                        {{DonorObj.email}}
+
+                    </div>
+
+
+                    <div class="mb-3">
+
+                        <i class="fa-solid fa-phone"></i>
+
+                        <b>Mobile:</b>
+
+                        {{DonorObj.Mobile_no}}
+
+                    </div>
+
+
+                    <div class="mb-3">
+
+                        <i class="fa-solid fa-user"></i>
+
+                        <b>Name:</b>
+
+                        {{DonorObj.name_}}
+
+                    </div>
+
+
+                    <div class="mb-3">
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                        <b>City:</b>
+
+                        {{DonorObj.City}}
+
+                    </div>
+
+
+                    <div class="mb-3">
+
+                        <i class="fa-solid fa-address-card"></i>
+
+                        <b>Address:</b>
+
+                        {{DonorObj.Address}}
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="modal-footer justify-content-center">
+
+                    <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">
+
+                        Close
+
+                    </button>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Bootstrap JS -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
+
+        </script>
+
+
+</body>
+
+</html>

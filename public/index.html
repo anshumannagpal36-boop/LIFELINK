@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style/signup.css">
+  <link rel="stylesheet" href="style/home.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <!-- signup -->
+  <script>
+    $(document).ready(function () {
+
+      $("#txtmail").blur(function () {
+
+        let email = $(this).val();
+
+        let emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
+        if (email.length == 0) {
+          alert("Email is required");
+
+        }
+        else if (!emailRegex.test(email)) {
+          $("#msgSpan").html("Invalid");
+        }
+        else {
+          $("#msgSpan").html("valid");
+        }
+
+
+
+      });
+
+    });
+
+    $(document).ready(function () {
+
+      $("#btnAjax").click(function () {
+
+        let obj = {
+          txtmail: $("#txtmail").val(),
+          txtpwd: $("#txtpwd").val(),
+          utype: $("#utype").val()
+        };
+
+        $.ajax({
+          url: "/do-signup",
+          type: "POST",
+          data: obj,
+
+          success: function (response) {
+            alert(response);
+            $("#msg2Span").html(response);
+          },
+
+          error: function (xhr) {
+            alert(xhr.responseText);
+          }
+        });
+
+      });
+
+    });
+  </script>
+
+  <!-- email vaidation -->
+  <script>
+    // Email Availability Check
+    $(document).ready(function () {
+
+      $("#txtmail").blur(function () {
+
+        $.ajax({
+          type: "GET",
+          url: "/check-email-ajax",
+          data: {
+            email: $("#txtmail").val()
+          },
+          success: function (response) {
+            alert(response);
+          }
+        });
+
+      });
+
+    });
+
+    //login 
+    $(document).ready(function () {
+      console.log("JavaScript loaded");
+      $("#btnAjax1").click(function () {
+
+        let obj = {
+          txtmail1: $("#txtmail1").val(),
+          txtpwd1: $("#txtpwd1").val()
+        };
+
+        $.ajax({
+          type: "POST",
+          url: "/do-login",
+          data: obj,
+
+          success: function (response) {
+
+
+            console.log(response);
+            if (response == "DONOR") {
+              console.log("redirecting");
+              location.href = "/dash";
+              localStorage.setItem("activeuser", $("#txtmail1").val());
+            }
+            else if (response == "NGO") {
+              console.log("redirecting");
+              location.href = "/NGOdash";
+              localStorage.setItem("activeuser", $("#txtmail1").val());
+            }
+            else if (response == "NEEDY") {
+              console.log("redirecting");
+              location.href = "/needy-dash";
+              localStorage.setItem("activeuser", $("#txtmail1").val());
+            }
+            else {
+              alert(response);
+            }
+          },
+
+          error: function (err) {
+            console.log(err);
+            alert("Error");
+          }
+        });
+      });
+    });
+
+  </script>
+
+
+
+<body id="home">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+
+  <nav class="navbar navbar-expand-lg"
+    style="position: fixed; width: 100%; z-index: 1000; top: 0; left: 0; background: linear-gradient(135deg, #09090B 0%, #111827 40%, #1E1B4B 100%);"
+    data-bs-theme="dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#home">
+        <img src="logo/ChatGPT Image Jul 26, 2026, 12_05_17 AM.png" alt="LifeLink Logo" class="logo">
+        <marquee behavior="" direction="left" style="width: 100px; color: white;"><span>LIFELINK</span></marquee>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarScroll">
+        <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#our-servise">Our Servises</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#Know">Know Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#contact">Contact Us</a>
+          </li>
+        </ul>
+
+        <div class="d-flex align-items-center">
+          <button type="button" class="btn signup p-2" data-bs-toggle="modal" data-bs-target="#exampleModal"
+            id="signup">
+            Signup
+          </button>
+
+          <button type="button" class="btn login-btn p-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+            id="login-btn">
+            Login
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <!-- SIGNUP MODAL -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+    data-bs-theme="dark">
+
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">
+            SIGN UP
+          </h1>
+
+          <button type="button" class="btn-close" data-bs-dismiss="modal">
+          </button>
+        </div>
+
+        <div class="modal-body">
+
+          <form id="signupForm">
+
+            <div id="Signup" class="auth-container">
+
+              <div id="image"></div>
+
+              <div class="box">
+                <span>
+                  <i class="fa-solid fa-envelope"></i>
+                  <b>Email Id</b>
+                </span>
+
+                <input type="email" style="margin-left: 28px;" required name="txtmail" id="txtmail">
+
+                <span id="msgSpan"></span>
+              </div>
+
+              <div class="box">
+                <span>
+                  <i class="fa-solid fa-lock"></i>
+                  <b>Password</b>
+                </span>
+
+                <input type="password" minlength="8" required name="txtpwd" id="txtpwd">
+              </div>
+
+              <div class="box">
+
+                <span>
+                  <i class="fa-solid fa-user"></i>
+                  <b>User Type</b>
+                </span>
+
+                <select class="form-select" id="utype" name="utype" style="margin-top: 5px;">
+
+                  <option value="select">Select</option>
+                  <option value="NGO">NGO</option>
+                  <option value="DONOR">DONOR</option>
+                  <option value="NEEDY">NEEDY</option>
+
+                </select>
+
+              </div>
+
+            </div>
+
+            <span id="msg2Span"></span>
+
+          </form>
+
+        </div>
+
+        <div class="modal-footer">
+
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Close
+          </button>
+
+          <button type="button" class="btn btn-primary" id="btnAjax">
+            Create Account
+          </button>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- LOGIN MODAL -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true" data-bs-theme="dark">
+
+    <div class="modal-dialog">
+
+      <div class="modal-content">
+
+        <div class="modal-header">
+
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">
+            Login
+          </h1>
+
+          <button type="button" class="btn-close" data-bs-dismiss="modal">
+          </button>
+
+        </div>
+
+        <div class="modal-body">
+
+          <form id="loginform">
+
+            <div id="Login" class="auth-container">
+
+              <div id="image"></div>
+
+              <div class="box">
+
+                <span>
+                  <i class="fa-solid fa-envelope"></i>
+                  <b>Email Id</b>
+                </span>
+
+                <input type="email" style="margin-left: 28px;" required name="txtmail1" id="txtmail1">
+
+              </div>
+
+              <div class="box">
+
+                <span>
+                  <i class="fa-solid fa-lock"></i>
+                  <b>Password</b>
+                </span>
+
+                <input type="password" minlength="8" required name="txtpwd1" id="txtpwd1">
+
+              </div>
+
+            </div>
+
+          </form>
+        </div>
+
+        <div class="modal-footer">
+
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Close
+          </button>
+
+          <button type="button" class="btn btn-primary" id="btnAjax1">
+            Login Here
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+  <div style="margin-top: 80px; width: 100%; overflow: hidden;">
+    <img src="style/img/Gemini_Generated_Image_em1d71em1d71em1d.png" alt="LifeLink Hero Graphic"
+      style="width: 100%; height: 500px;">
+  </div>
+  <div id="our-servise">
+    <center>
+      <h1 style="color: white; margin-top: 20px; margin-bottom: -40px;"><b>Our Services</b></h1>
+    </center>
+    <section class="card-section">
+      <div class="card-grid">
+
+        <!-- Card 1 -->
+        <div class="card" style="background-color: transparent;">
+          <div class="card-header">
+            <img src="style/img/Screenshot 2026-08-06 224029.png" alt="Donate medicine and equipment" />
+          </div>
+          <div class="card-body">
+            <h3 class="card-title" style="color: #94a3b8;">Donate medicine and equipment</h3>
+            <p class="card-text">
+              List medicines, mobility aids, or medical equipment you no longer need. Donors set the item, condition,
+              and pickup or drop-off details in minutes.
+            </p>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card" style="background-color: transparent;">
+          <div class="card-header">
+            <img src="style/img/Screenshot 2026-08-06 224043.png" alt="Find equipment, free or low-cost" />
+          </div>
+          <div class="card-body">
+            <h3 class="card-title" style="color: #94a3b8;">Find equipment, free or low-cost</h3>
+            <p class="card-text">
+              Search available items from verified donors near you. Take what's offered for free, or purchase equipment
+              directly when a donor has set a price.
+            </p>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card" style="background-color: transparent;">
+          <div class="card-header">
+            <img src="style/img/Screenshot 2026-08-06 224057.png" alt="Request through a registered NGO" />
+          </div>
+          <div class="card-body">
+            <h3 class="card-title" style="color: #94a3b8;">Request through a registered NGO</h3>
+            <p class="card-text">
+              Search registered NGOs near you and request medicine they've collected from donors. NGOs verify and
+              distribute items directly to people who need them.
+            </p>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="card" style="background-color: transparent;">
+          <div class="card-header">
+            <img src="style/img/Screenshot 2026-08-06 224108.png" alt="Partner as an NGO" />
+          </div>
+          <div class="card-body">
+            <h3 class="card-title" style="color: #94a3b8;">Partner as an NGO</h3>
+            <p class="card-text">
+              Register your organization to receive donated medicine from donors and distribute it to people in your
+              community who request it.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </div>
+  <div id="Know">
+    <center>
+      <h1 style="color: white; margin-top: -40px; margin-bottom: -70px;"><b>Know Us</b></h1>
+    </center>
+    <section class="card-section" id="cardsec">
+      <div class="card-grid" id="cardgrid">
+
+        <div class="card" id="card" style="background-color: transparent;">
+          <div class="card-header" id="cardimg">
+            <img src="style/img/Screenshot 2026-08-07 214133.png" alt="Mentor" style="border-radius: 35%;" />
+          </div>
+          <div class="card-body">
+            <h3 class="card-title" style="color: #94a3b8;">Under The Guidance Of</h3>
+            <p class="card-text">
+              Rajesh K. Bansal <br>
+              We sincerely express our gratitude to Mr. Rajesh K. Bansal for his constant guidance, encouragement, and
+              valuable support throughout the development of this project. His mentorship played a significant role in
+              shaping this platform successfully.
+            </p>
+          </div>
+        </div>
+
+        <div class="card" id="card" style="background-color: transparent;">
+          <div class="card-header" id="cardimg">
+            <img src="style/img/WhatsApp Image 2026-08-07 at 10.03.51 PM.jpeg" alt="Developer image"
+              style="border-radius: 35%;" />
+          </div>
+          <div class="card-body">
+            <h3 class="card-title" style="color: #94a3b8;">Developed By</h3>
+            <p class="card-text">
+              Mr. Anshuman Nagpal <br>
+              B-Tech CSE(AI & ML) Student <br>
+              Institute: Baba Farid College Of Engineering And Technology <br>
+              I designed and developed this platform to connect donors, NGOs, and needy people, making the donation of
+              medicines and medical equipment
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </div>
+  <div style="font-family: Arial, sans-serif; padding: 20px;" id="contact">
+
+    <!-- Header -->
+    <div style="text-align: center; margin-bottom: 30px;">
+      <h2 style="color: white; font-size: 32px; margin: 0 0 8px 0;">Contact Us</h2>
+      <p style="color: #64748b; font-size: 16px; margin: 0;">Get in touch with us anytime.</p>
+    </div>
+
+    <!-- Cards Container -->
+    <div
+      style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; width: 100%; max-width: 1000px; margin: 0 auto 50px auto;">
+
+      <!-- Contact Info Card -->
+      <div
+        style="background-color: white; width: 400px; padding: 25px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); box-sizing: border-box;">
+
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+          <i class="fa-solid fa-address-card"
+            style="font-size: 20px; color: black; background: #f7f1eb; padding: 8px; border-radius: 8px;"></i>
+          <h3 style="color: black; margin: 0; font-size: 22px;">Contact Information</h3>
+        </div>
+
+        <hr style="border: none; border-bottom: 1px solid #e2e8f0; margin-bottom: 20px;">
+
+        <div style="display: flex; flex-direction: column; gap: 18px; color: #475569; font-size: 15px;">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <i class="fa-solid fa-envelope" style="color: black; width: 20px;"></i>
+            <span>anshumannagpal@gmail.com</span>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <i class="fa-solid fa-phone" style="color: black; width: 20px;"></i>
+            <span>+91 XXXXX XXXXX</span>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <i class="fa-solid fa-location-dot" style="color: black; width: 20px;"></i>
+            <span>Baba Farid Group of Institutions</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Map Card -->
+      <div
+        style="background-color: white; width: 400px; height: 290px; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.08);">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3446.507009080042!2d74.8393112793457!3d30.251132099999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391731172aeedaaf%3A0x7d09b26e96ee593b!2sBaba%20Farid%20Group%20of%20Institutions!5e0!3m2!1sen!2sin!4v1786122849483!5m2!1sen!2sin"
+          width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+          referrerpolicy="strict-origin-when-cross-origin">
+        </iframe>
+      </div>
+
+    </div>
+
+    <!-- Copyright Footer -->
+    <footer
+      style="text-align: center; border-top: 1px solid #e2e8f0; padding-top: 20px; margin-top: 20px; color: #94a3b8; font-size: 14px;">
+      <p style="margin: 0;">&copy; 2026 LifeLink. All Rights Reserved. Designed & Developed by <strong
+          style="color: white;">Anshuman Nagpal</strong>.</p>
+    </footer>
+
+  </div>
+
+
+
+</body>
+
+</html>

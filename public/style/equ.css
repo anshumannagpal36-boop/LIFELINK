@@ -1,0 +1,233 @@
+/* ================= BODY ================= */
+
+body {
+    background: linear-gradient(135deg, #09090B, #111827, #1E1B4B);
+    min-height: 100vh;
+    color: white;
+}
+
+
+/* ================= NAVBAR ================= */
+
+.navbar {
+    height: 80px;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: linear-gradient(135deg, #09090B, #111827, #1E1B4B);
+    border-bottom: 1px solid rgba(79, 139, 255, 0.4);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+}
+
+.navbar .container {
+    height: 80px;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0 12px;
+    margin: auto;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    height: 80px;
+    padding: 0;
+    text-decoration: none;
+}
+
+.logo {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+}
+
+.brand-marquee {
+    width: 150px;
+    height: 40px;
+    line-height: 40px;
+    margin-left: 0;
+}
+
+.brand-marquee span {
+    color: white;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+
+/* ================= MAIN HEADING ================= */
+
+.main-heading {
+    text-align: center;
+    font-size: 38px;
+    font-weight: 700;
+    color: white;
+    margin-top: 30px;
+    letter-spacing: 1px;
+}
+
+
+/* ================= DIVIDER ================= */
+
+.title-divider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0 40px;
+}
+
+.line {
+    width: 120px;
+    height: 2px;
+    background: #4F46E5;
+}
+
+.title-divider i {
+    color: #4F46E5;
+    font-size: 28px;
+    margin: 0 20px;
+}
+
+
+/* ================= MAIN CARD ================= */
+
+.donor-card {
+    max-width: 1200px;
+    background: #141B2D;
+    border: 1px solid rgba(79, 70, 229, 0.5);
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 50px;
+    box-shadow: 0 0 35px rgba(0, 0, 0, 0.35);
+}
+
+
+/* ================= PROFILE BOX ================= */
+
+.profile-box {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    padding: 35px;
+    background: #18213A;
+}
+
+
+/* ================= PROFILE TITLE ================= */
+
+.profile-title {
+    color: #4F8BFF;
+    font-size: 30px;
+    font-weight: 600;
+}
+
+
+/* ================= FORM LABEL ================= */
+
+label {
+    color: #E5E7EB;
+    font-weight: 500;
+}
+
+
+/* ================= INPUTS ================= */
+
+.form-control,
+.form-select {
+    background: #1D2742;
+    border: 1px solid #3E4C80;
+    color: white;
+    height: 52px;
+    border-radius: 12px;
+    padding-left: 18px;
+}
+
+.form-control:focus,
+.form-select:focus {
+    background: #1D2742;
+    color: white;
+    border-color: #4F8BFF;
+    box-shadow: 0 0 10px rgba(79, 139, 255, 0.3);
+}
+
+.form-control::placeholder {
+    color: #9CA3AF;
+}
+
+
+/* ================= INPUT ICONS ================= */
+
+.input-group-text {
+    background: #1D2742;
+    border: 1px solid #3E4C80;
+    color: #4F8BFF;
+    border-radius: 12px 0 0 12px;
+}
+
+
+/* ================= FILE UPLOAD ================= */
+
+input[type="file"] {
+    background: #1D2742;
+    color: white;
+    border: 2px dashed #4F46E5;
+    border-radius: 12px;
+    padding: 12px;
+}
+
+
+/* ================= BUTTON ================= */
+
+#btn1,
+#btn2,
+#btn {
+    background: linear-gradient(135deg, #4F8BFF, #6D28D9);
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    height: 52px;
+    color: white;
+    transition: 0.3s;
+}
+
+#btn1:hover,
+#btn2:hover,
+#btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(79, 139, 255, 0.35);
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 768px) {
+
+    .donor-card {
+        padding: 20px;
+    }
+
+    .profile-box {
+        padding: 20px;
+    }
+
+    .main-heading {
+        font-size: 30px;
+    }
+
+    .profile-title {
+        font-size: 22px;
+    }
+
+    .logo {
+        width: 60px;
+        height: 60px;
+    }
+
+    .brand-marquee {
+        width: 130px;
+    }
+
+    .brand-marquee span {
+        font-size: 20px;
+    }
+}

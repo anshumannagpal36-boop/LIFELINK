@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avail Medicine</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+
+    <link rel="stylesheet" href="style/avail.css">
+
+    <script>
+        function showPreview(fileCtrl) {
+            const file = fileCtrl.files[0];
+
+            if (file) {
+                document.getElementById("prev").src =
+                    URL.createObjectURL(file);
+            }
+        }
+    </script>
+    <script>
+        function setemail() {
+            document.getElementById("email").value = localStorage.getItem("activeuser");
+
+        }
+    </script>
+
+</head>
+
+<body onload="setemail()">
+
+
+    <div class="container-fluid mt-4">
+
+        <h1 class="main-heading">
+            Avail Medicine
+        </h1>
+
+        <div class="title-divider">
+            <span class="line"></span>
+            <i class="fa-solid fa-capsules"></i>
+            <span class="line"></span>
+        </div>
+
+    </div>
+
+
+    <div class="container medicine-card">
+
+        <form action="/avail-medicine" method="post" enctype="multipart/form-data">
+
+            <div class="row">
+
+                <!-- LEFT SIDE -->
+
+                <div class="col-lg-4">
+
+                    <div class="image-box">
+
+                        <h5 class="mb-3">
+                            Medicine Image
+                        </h5>
+
+                        <img src="images/upload.png" id="prev">
+
+                        <input type="file" class="form-control mt-4" name="medPic" onchange="showPreview(this)">
+
+                    </div>
+
+                </div>
+
+
+                <!-- RIGHT SIDE -->
+
+                <div class="col-lg-8">
+
+                    <div class="row">
+
+                        <div class="col-md-12 mb-4">
+
+                            <label>Email ID</label>
+
+                            <div class="input-group">
+
+                                <span class="input-group-text">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </span>
+
+                                <input type="email" class="form-control" name="email" id="email"
+                                    placeholder="Enter Email" readonly>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="col-md-6 mb-4">
+
+                            <label>Medicine Name</label>
+
+                            <div class="input-group">
+
+                                <span class="input-group-text">
+                                    <i class="fa-solid fa-capsules"></i>
+                                </span>
+
+                                <input type="text" class="form-control" name="medicine" id="medicine">
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="col-md-3 mb-4">
+
+                            <label>Expiry Date</label>
+
+                            <input type="date" class="form-control" name="expiry" id="expiry">
+
+                        </div>
+
+
+
+                        <div class="col-md-3 mb-4">
+
+                            <label>Company</label>
+
+                            <input type="text" class="form-control" name="company" id="company">
+
+                        </div>
+
+
+
+                        <div class="col-md-4 mb-4">
+
+                            <label>Packing</label>
+
+                            <select class="form-select" name="packing" id="packing">
+
+                                <option>Select</option>
+
+                                <option>Strip</option>
+
+                                <option>Bottle</option>
+
+                                <option>Tube</option>
+
+                                <option>Box</option>
+
+                            </select>
+
+                        </div>
+
+
+
+                        <div class="col-md-4 mb-4">
+
+                            <label>Quantity</label>
+
+                            <input type="number" class="form-control" name="qty" id="qty">
+
+                        </div>
+
+
+
+                        <div class="col-md-4 mb-4">
+
+                            <label>Other Info</label>
+                            <textarea name="info" id="info" class="form-control" cols="100" rows="4"></textarea>
+
+                        </div>
+
+
+
+                        <div class="col-12 text-center mt-3">
+                            <input type="submit" class="gradient-btn" value=" Avail Medicine" id="Availmed"
+                                name="Availmed">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

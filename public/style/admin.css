@@ -1,0 +1,60 @@
+body {
+    background: linear-gradient(135deg,
+            #09090B 0%,
+            #111827 40%,
+            #1E1B4B 100%);
+
+    color: white;
+}
+
+tr {
+    text-align: center;
+    height: 50px;
+    color: white;
+    border-radius: 18px;
+    object-fit: cover;
+    background: transparent;
+}
+
+a {
+    background: #0d6efd;
+    color: white;
+    height: 40px;
+    text-decoration: none;
+    border: 1px solid #60A5FA;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    padding-top: 6px;
+    margin-left: 10px;
+}
+
+#btn {
+    background-color: green;
+    color: white;
+    height: 27px;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+}
+
+#btn1 {
+    background-color: red;
+    color: white;
+   height: 27px;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+}
+.logo {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+
+}
+
+.navbar {
+    height: 80px;
+    padding: 0;
+    margin-left: -100px;
+}

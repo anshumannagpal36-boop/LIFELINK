@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor Profile</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+
+    <link rel="stylesheet" href="style/donnr.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+        function doShowPrev(fileCtrl, prev) {
+
+            const file = fileCtrl.files[0];
+
+            if (file) {
+                prev.src = URL.createObjectURL(file);
+            }
+
+        }
+    </script>
+    <script>
+        function setemail() {
+            document.getElementById("email").value = localStorage.getItem("activeuser");
+
+        }
+    </script>
+
+
+    <script>
+        $(document).ready(function () {
+
+
+
+            $("#btnget").click(function () {
+
+                let obj = {
+                    url: "/Get-Data",
+                    type: "GET",
+                    data: {
+                        email: $("#email").val()
+                    }
+                };
+
+                $.ajax(obj).then(function (jsonAry) {
+
+                    if (jsonAry.length == 0) {
+                        alert("No profile found.");
+                        return;
+                    }
+
+                    // Fill input boxes
+                    $("#name").val(jsonAry[0].name_);
+                    $("#no").val(jsonAry[0].Mobile_no);
+                    $("#add").val(jsonAry[0].Address);
+                    $("#city").val(jsonAry[0].City);
+                    // Show profile picture (if you have an <img id="prev">)
+                    $("#prevAadhar").val("src", jsonAry[0].Aadhar_path);
+                    $("#prevProfile").val("src", jsonAry[0].pic_path);
+                    $("#hnd").val("src", jsonAry[0].Aadhar_path);
+                    $("#hnd1").val("src", jsonAry[0].pic_path);
+                }).fail(function (err) {
+
+                    alert(err.responseText);
+
+                });
+
+            });
+        });
+    </script>
+
+</head>
+
+<body onload="setemail()">
+  
+    <form action="/Donor-profile" enctype="multipart/form-data" method="post">
+        <input type="hidden" id="hnd" name="hnd">
+        <input type="hidden" id="hnd1" name="hnd1">
+        <!-- Heading -->
+
+        <div class="container-fluid mt-4">
+
+            <h1 class="main-heading">Donor Profile</h1>
+
+            <div class="title-divider">
+                <span class="line"></span>
+                <i class="fa-solid fa-heart-pulse"></i>
+                <span class="line"></span>
+            </div>
+
+        </div>
+
+
+        <!-- Main Card -->
+
+        <div class="container donor-card">
+            <!-- Profile Card -->
+
+            <div class="profile-box">
+
+                <div class="text-center mb-5">
+
+                    <i class="fa-regular fa-user profile-icon"></i>
+
+                    <span class="profile-title">
+                        Donor Profile
+                    </span>
+
+                </div>
+
+
+                <!-- Email -->
+
+                <div class="row mb-4">
+
+                    <div class="col-md-6">
+
+                        <label>Email Id</label>
+
+                        <div class="input-group">
+
+                            <span class="input-group-text">
+                                <i class="fa-regular fa-envelope"></i>
+                            </span>
+
+                            <input type="email" class="form-control custom-input" placeholder="Enter email" id="email"
+                                name="email" readonly>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-4 d-flex align-items-end" id="data">
+
+                        <button type="button" class="btn gradient-btn w-100" id="btnget">
+                            <i class="fa-solid fa-download"></i>
+                            Get Profile Data
+                        </button>
+                    </div>
+
+                </div>
+
+
+                <!-- Name & Mobile -->
+
+                <div class="row mb-4">
+
+                    <div class="col-md-6">
+
+                        <label>Name</label>
+
+                        <div class="input-group">
+
+                            <span class="input-group-text">
+                                <i class="fa-regular fa-user"></i>
+                            </span>
+
+                            <input type="text" class="form-control custom-input" placeholder="Enter full name" id="name"
+                                name="name">
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <label>Mobile Number</label>
+
+                        <div class="input-group">
+
+                            <span class="input-group-text">
+                                <i class="fa-solid fa-phone"></i>
+                            </span>
+
+                            <input type="text" class="form-control custom-input" placeholder="Enter mobile number"
+                                id="no" name="no">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Address & City -->
+
+                <div class="row mb-4">
+
+                    <div class="col-md-8">
+
+                        <label>Address</label>
+
+                        <div class="input-group">
+
+                            <span class="input-group-text">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </span>
+
+                            <input type="text" class="form-control custom-input" placeholder="Enter address" id="add"
+                                name="add">
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <label>City</label>
+
+                        <div class="input-group">
+
+                            <span class="input-group-text">
+                                <i class="fa-solid fa-city"></i>
+                            </span>
+
+                            <input type="text" class="form-control custom-input" placeholder="Enter city" name="city"
+                                id="city">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Upload Section -->
+
+                <div class="row mb-5">
+
+                    <!-- Aadhaar Card -->
+                    <div class="col-md-6">
+
+                        <label>Upload Aadhaar Card</label>
+
+                        <div class="upload-box text-center">
+
+                            <img src="" id="prevAadhar" width="500" height="500"
+                                style="width: 200px; height: 200px; border:1px solid #ccc; margin-bottom:10px; object-fit:cover;">
+
+                            <input type="file" class="form-control mt-3" name="Aadhar_pic" id="Aadhar_pic"
+                                onchange="doShowPrev(this, prevAadhar)">
+
+                        </div>
+
+                    </div>
+
+                    <!-- Profile Picture -->
+                    <div class="col-md-6">
+
+                        <label>Profile Picture</label>
+
+                        <div class="upload-box text-center">
+
+                            <img src="" id="prevProfile" width="100" height="100"
+                                style="width: 200px; height: 200px; border:1px solid #ccc; margin-bottom:10px; object-fit:cover;">
+
+                            <input type="file" id="profile_pic" name="profile_pic" class="form-control mt-3"
+                                onchange="doShowPrev(this, prevProfile)">
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- Buttons -->
+
+            <div class="text-center">
+
+                <input type="submit" id="btn1" value="Submit">
+                <input type="submit" id="btn2" formaction="update-data" value="Modify Profile">
+            </div>
+
+        </div>
+
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    </form>
+</body>
+
+</html>

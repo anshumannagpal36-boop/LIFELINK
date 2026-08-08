@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Needy Dashboard</title>
+    <!-- Bootstrap -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- CSS -->
+
+    <link rel="stylesheet" href="style/needy_dash.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+
+
+    <script>
+        function do_logout() {
+            localStorage.removeItem("activeuser");
+            location.href = "/";
+        }
+    </script>
+    <script>
+        let myModule = angular.module("mouduleKuch", []);
+        let myController = myModule.controller("controllerKuch", function ($scope, $http) {
+
+        })
+    </script>
+</head>
+
+<body ng-app="mouduleKuch" ng-controller="controllerKuch" ng-init="doShowAll();">
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar navbar-expand-lg navbar-dark shadow">
+
+        <div class="container">
+
+            <div>
+                <a class="navbar-brand d-flex align-items-center" href="#">
+                    <img src="logo/ChatGPT Image Jul 26, 2026, 12_05_17 AM.png" alt="LifeLink Logo" class="logo">
+                    <marquee behavior="" direction="left" style="width: 150px;"><span>LIFELINK</span></marquee>
+                </a>
+            </div>
+
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
+
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+
+            <div class="collapse navbar-collapse" id="menu">
+
+
+                <ul class="navbar-nav ms-auto">
+
+                    <li class="nav-item me-3">
+
+                        <a class="nav-link" href="#">
+
+                            <i class="fa-solid fa-user"></i>
+
+                            Needy Dashboard
+
+                        </a>
+
+                    </li>
+
+                    <li class="nav-item">
+
+                        <button class="btn btn-danger" onclick="do_logout()">
+
+                            <i class="fa-solid fa-right-from-bracket"></i>
+
+                            Logout
+
+                        </button>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+    <!-- ================= HERO ================= -->
+
+    <div class="container mt-5">
+
+        <h1 class="display-5 fw-bold" style="color: white;">
+
+            Welcome,
+
+
+            👋
+
+        </h1>
+
+        <p class="text-secondary">
+
+            Manage your profile efficiently.
+
+        </p>
+
+        <div class="line"></div>
+
+    </div>
+
+    <!-- ================= DASHBOARD ================= -->
+
+    <div class="container mt-5">
+
+        <div class="row g-4">
+
+            <!-- Profile -->
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="card dashboard-card h-100">
+
+                    <div class="card-body text-center">
+
+                        <div class="icon-circle profile">
+
+                            <i class="fa-solid fa-user"></i>
+
+                        </div>
+
+                        <h3 class="mt-4">
+
+                            Profile
+
+                        </h3>
+
+                        <p>
+
+                            View and manage your profile information.
+
+                        </p>
+
+                        <a href="/needy-profile" id="profile"><i class="fa-regular fa-user profile-icon "></i>&nbsp;
+                            View
+                            Profile</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Medicine -->
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="card dashboard-card h-100">
+
+                    <div class="card-body text-center">
+
+                        <div class="icon-circle medicine">
+
+                            <i class="fa-solid fa-kit-medical"></i>
+
+                        </div>
+
+                        <h3 class="mt-4">
+
+                            Find NGO
+
+                        </h3>
+
+                        <p>
+
+                            Browse and Find NGO Nere You.
+
+                        </p>
+
+
+                        <a href="/Ngofind" id="med"><i class="fa-solid fa-capsules"></i>&nbsp;Find NGO</a>
+
+
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Equipment -->
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="card dashboard-card h-100">
+
+                    <div class="card-body text-center">
+
+                        <div class="icon-circle equipment">
+
+                            <i class="fa-solid fa-wheelchair"></i>
+
+                        </div>
+
+                        <h3 class="mt-4">
+
+                            Find Equipment
+
+                        </h3>
+
+                        <p>
+
+                            Browse and request available equipment.
+
+                        </p>
+                        <a href="/equfind" id="equ"> <i class="fa-solid fa-kit-medical"></i>&nbsp;Find Equipment</a>
+
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================= FOOTER ================= -->
+
+        <footer
+            style="text-align: center; border-top: 1px solid #e2e8f0; padding-top: 20px; margin-top: 20px; color: #94a3b8; font-size: 14px;">
+            <p style="margin: 0;">&copy; 2026 LifeLink. All Rights Reserved. Designed & Developed by <strong
+                    style="color: white;">Anshuman Nagpal</strong>.</p>
+        </footer>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

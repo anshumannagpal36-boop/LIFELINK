@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor Profile</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+
+    <link rel="stylesheet" href="style/equ.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+        function doShowPrev(fileCtrl, prev) {
+
+            const file = fileCtrl.files[0];
+
+            if (file) {
+                prev.src = URL.createObjectURL(file);
+            }
+
+        }
+    </script>
+
+
+    <script>
+
+        function doShowPrev(fileCtrl, prev) {
+
+            if (fileCtrl.files && fileCtrl.files[0]) {
+                prev.src = URL.createObjectURL(fileCtrl.files[0]);
+            }
+
+        }
+
+        // Enable Amount only for Sale
+
+        $(document).ready(function () {
+
+            $("#sale").change(function () {
+
+                $("#amount").prop("disabled", false);
+
+            });
+
+            $("#donation").change(function () {
+
+                $("#amount").prop("disabled", true);
+                $("#amount").val(0);
+
+            });
+
+        });
+
+    </script>
+    <script>
+        function setemail() {
+            document.getElementById("email").value = localStorage.getItem("activeuser");
+
+        }
+    </script>
+
+</head>
+
+
+
+<body onload="setemail()">
+
+
+    <form action="/avail-equipment" method="post" enctype="multipart/form-data">
+
+        <!-- Heading -->
+        <div class="container-fluid mt-4">
+
+            <h1 class="main-heading">Avail Medical Equipment</h1>
+
+            <div class="title-divider">
+                <span class="line"></span>
+                <i class="fa-solid fa-kit-medical"></i>
+                <span class="line"></span>
+            </div>
+
+        </div>
+
+        <!-- Main Card -->
+        <div class="container donor-card">
+
+            <div class="profile-box">
+
+                <div class="text-center mb-5">
+
+                    <i class="fa-solid fa-kit-medical profile-icon"></i>
+
+                    <span class="profile-title">
+                        Medical Equipment Availability
+                    </span>
+
+                </div>
+
+                <!-- Email -->
+
+                <div class="row mb-4 justify-content-center">
+
+                    <div class="col-md-8">
+
+                        <label class="mb-2">Email ID</label>
+
+                        <div class="input-group">
+
+                            <span class="input-group-text">
+                                <i class="fa-regular fa-envelope"></i>
+                            </span>
+
+                            <input type="email" class="form-control custom-input" placeholder="Enter Email" id="email"
+                                name="email" required readonly>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Equipment Type & Condition -->
+
+                <div class="row mb-4">
+
+                    <div class="col-md-6">
+
+                        <label class="mb-2">
+                            Medical Equipment Type
+                        </label>
+
+                        <div class="input-group">
+
+                            <span class="input-group-text">
+                                <i class="fa-solid fa-wheelchair"></i>
+                            </span>
+
+                            <input type="text" class="form-control custom-input" placeholder="Equipment Name" id="type"
+                                name="type" required>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <label class="mb-2">
+                            Condition
+                        </label>
+
+                        <div class="input-group">
+
+                            <span class="input-group-text">
+                                <i class="fa-solid fa-circle-check"></i>
+                            </span>
+
+                            <select class="form-select custom-input" id="condition" name="condition"
+                                style="background-color: #1D2742; color: white;">
+
+                                <option value="">Select Condition</option>
+                                <option>Excellent</option>
+                                <option>Good</option>
+                                <option>Average</option>
+                                <option>Needs Repair</option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Donation / Sale -->
+
+                <div class="row mb-5 align-items-end">
+
+                    <div class="col-md-3">
+
+                        <div class="form-check">
+
+                            <input class="form-check-input" type="radio" name="status" id="donation" value="Donation"
+                                checked>
+
+                            <label class="form-check-label">
+                                Donation
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-3">
+
+                        <div class="form-check">
+
+                            <input class="form-check-input" type="radio" name="status" id="sale" value="Sale">
+
+                            <label class="form-check-label">
+                                For Sale
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <label class="mb-2">
+                            Amount
+                        </label>
+
+                        <div class="input-group">
+
+                            <span class="input-group-text">
+                                ₹
+                            </span>
+
+                            <input type="number" class="form-control custom-input" placeholder="Enter Amount"
+                                id="amount" name="amount" value="0" disabled>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Equipment Images -->
+
+                <div class="row mb-4">
+
+                    <!-- Equipment Image 1 -->
+                    <div class="col-md-6">
+
+                        <label class="mb-2">
+                            Equipment Image 1
+                        </label>
+
+                        <div class="upload-box text-center p-3">
+
+                            <img src="" id="prev1" style="width:220px;
+                                    height:220px;
+                                    object-fit:cover;
+                                    border:2px dashed #d8d8d8;
+                                    border-radius:15px;
+                                    margin-bottom:15px;">
+
+                            <input type="file" class="form-control" id="pic1" name="pic1" accept="image/*"
+                                onchange="doShowPrev(this,prev1)">
+
+                        </div>
+
+                    </div>
+
+                    <!-- Equipment Image 2 -->
+                    <div class="col-md-6">
+
+                        <label class="mb-2">
+                            Equipment Image 2
+                        </label>
+
+                        <div class="upload-box text-center p-3">
+
+                            <img src="" id="prev2" style="width:220px;
+                                    height:220px;
+                                    object-fit:cover;
+                                    border:2px dashed #d8d8d8;
+                                    border-radius:15px;
+                                    margin-bottom:15px;">
+
+                            <input type="file" class="form-control" id="pic2" name="pic2" accept="image/*"
+                                onchange="doShowPrev(this,prev2)">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Other Information -->
+
+                <div class="row mb-5">
+
+                    <div class="col-12">
+
+                        <label class="mb-2">
+                            Other Information
+                        </label>
+
+                        <textarea class="form-control custom-input" rows="5" name="info" id="info"
+                            placeholder="Write any additional information here (Optional)..."></textarea>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Buttons -->
+
+                <div class="text-center">
+
+                    <input type="submit" style="width: 200px;" class="btn gradient-btn px-5 py-2"
+                        value="Avail Equipment" id="btn1" name="btn1">
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

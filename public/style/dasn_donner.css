@@ -1,0 +1,158 @@
+body {
+    background: linear-gradient(135deg,
+            #09090B 0%,
+            #111827 40%,
+            #1E1B4B 100%);
+}
+
+#profile {
+
+    width: 100%;
+    height: 50px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: linear-gradient(135deg, #2563EB, #3B82F6);
+
+    color: #fff;
+
+    text-decoration: none;
+
+    border-radius: 12px;
+
+    font-size: 17px;
+
+    font-weight: 600;
+
+    border: none;
+
+    transition: .35s;
+
+    box-shadow: 0 8px 20px rgba(37, 99, 235, .30);
+
+}
+
+#profile:hover {
+
+    background: linear-gradient(135deg, #1D4ED8, #2563EB);
+
+    transform: translateY(-3px);
+
+    color: white;
+
+    box-shadow: 0 15px 30px rgba(37, 99, 235, .40);
+
+}
+
+
+/* ================= MEDICINE ================= */
+
+#med {
+
+    width: 100%;
+
+    height: 50px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: linear-gradient(135deg, #10B981, #34D399);
+
+    color: white;
+
+    text-decoration: none;
+
+    border-radius: 12px;
+
+    font-size: 17px;
+
+    font-weight: 600;
+
+    border: none;
+
+    transition: .35s;
+
+    box-shadow: 0 8px 20px rgba(16, 185, 129, .30);
+
+}
+
+#med:hover {
+
+    background: linear-gradient(135deg, #059669, #10B981);
+
+    transform: translateY(-3px);
+
+    color: white;
+
+    box-shadow: 0 15px 30px rgba(16, 185, 129, .40);
+
+}
+
+
+/* ================= EQUIPMENT ================= */
+
+#equ {
+
+    width: 100%;
+
+    height: 50px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: linear-gradient(135deg, #7C3AED, #8B5CF6);
+
+    color: white;
+
+    text-decoration: none;
+
+    border-radius: 12px;
+
+    font-size: 17px;
+
+    font-weight: 600;
+
+    border: none;
+
+    transition: .35s;
+
+    box-shadow: 0 8px 20px rgba(124, 58, 237, .30);
+
+}
+
+#equ:hover {
+
+    background: linear-gradient(135deg, #6D28D9, #7C3AED);
+
+    transform: translateY(-3px);
+
+    color: white;
+
+    box-shadow: 0 15px 30px rgba(124, 58, 237, .40);
+
+}
+
+#btnget {
+    background-color: darkgray;
+    border: none;
+    border-radius: 12px;
+    height: 40px;
+
+}
+
+.logo {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+
+}
+
+.navbar {
+    height: 80px;
+    padding: 0;
+    margin-left: -100px;
+}

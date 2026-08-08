@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Donor Dashboard</title>
+    <!-- Bootstrap -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- CSS -->
+
+    <link rel="stylesheet" href="style/dasn_donner.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+
+
+    <script>
+        function do_logout() {
+            localStorage.removeItem("activeuser");
+            location.href = "/";
+        }
+    </script>
+    <script>
+        function setemail() {
+            let email = localStorage.getItem("activeuser");
+
+            let input = document.getElementById("email");
+            input.value = email;
+            input.dispatchEvent(new Event('input'));
+        }
+    </script>
+    <script>
+        let myModule = angular.module("mouduleKuch", []);
+        let myController = myModule.controller("controllerKuch", function ($scope, $http) {
+            $scope.doShowAll = function (email) {
+                let url = "/fetch-all1?emailid=" + email;
+                $http.get(url).then(function (resp) {
+                    //alert(JSON.stringify(resp.data))
+                    $scope.jsonArray = resp.data;
+                }, function (err) {
+                    alert(err);
+                });
+            }
+            $scope.doDelete1 = function (rid) {
+
+                if (!confirm("Do you want to delete this equipment?"))
+                    return;
+
+                let url = "/delete-equipment?rid=" + rid;
+
+                $http.get(url).then(function (response) {
+
+                    alert(response.data);
+
+                    // Refresh table
+                    $scope.doShowAll($scope.email);
+
+                }, function (err) {
+
+                    alert("Delete Failed");
+
+                });
+
+            }
+            $scope.doShowequ = function (email) {
+
+                if (!email) {
+                    alert("Please enter Email ID");
+                    return;
+                }
+
+                let url = "/fetch-equ?emailid=" + email;
+
+                $http.get(url).then(function (resp) {
+
+                    $scope.equArray = resp.data;
+
+                }, function (err) {
+
+                    alert("Unable to fetch Equipment data.");
+
+                });
+
+            }
+
+
+            $scope.doDeleteequ = function (rid) {
+
+                if (!confirm("Do you want to delete this Equipment?"))
+                    return;
+
+                let url = "/delete-equ?rid=" + rid;
+
+                $http.get(url).then(function (resp) {
+
+                    alert(resp.data);
+
+                    $scope.doShowequ($scope.email);
+
+                }, function () {
+
+                    alert("Delete Failed");
+
+                });
+
+            }
+
+
+
+            $scope.doShowMedicine = function (email) {
+
+                if (!email) {
+                    alert("Please enter Email ID");
+                    return;
+                }
+
+                let url = "/fetch-medicine?emailid=" + email;
+
+                $http.get(url).then(function (resp) {
+
+                    $scope.medicineArray = resp.data;
+
+                }, function (err) {
+
+                    alert("Unable to fetch medicine data.");
+
+                });
+
+            }
+
+
+            $scope.doDeleteMedicine = function (rid) {
+
+                if (!confirm("Do you want to delete this medicine?"))
+                    return;
+
+                let url = "/delete-medicine?rid=" + rid;
+
+                $http.get(url).then(function (resp) {
+
+                    alert(resp.data);
+
+                    $scope.doShowMedicine($scope.email);
+
+                }, function () {
+
+                    alert("Delete Failed");
+
+                });
+
+            }
+            $scope.updatePassword = function () {
+
+                $http.post("/update-password", {
+                    email: $scope.email2,
+                    oldPwd: $scope.pwd,
+                    newPwd: $scope.pwd2
+                }).then(function (resp) {
+                    alert(resp.data);
+                }, function (err) {
+                    alert(err.data);
+                });
+
+            };
+
+
+        })
+    </script>
+</head>
+
+<body ng-app="mouduleKuch" ng-controller="controllerKuch" ng-init="doShowAll();" onload="setemail()">
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar navbar-expand-lg navbar-dark shadow">
+
+        <div class="container">
+
+            <div>
+                <a class="navbar-brand d-flex align-items-center" href="#">
+                    <img src="logo/ChatGPT Image Jul 26, 2026, 12_05_17 AM.png" alt="LifeLink Logo" class="logo">
+                    <marquee behavior="" direction="left" style="width: 150px;"><span>LIFELINK</span></marquee>
+                </a>
+            </div>
+
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
+
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+
+            <div class="collapse navbar-collapse" id="menu">
+
+
+                <ul class="navbar-nav ms-auto">
+
+                    <li class="nav-item me-3">
+
+                        <a class="nav-link" href="#">
+
+                            <i class="fa-solid fa-user"></i>
+
+                            Donor Dashboard
+
+                        </a>
+
+                    </li>
+
+                    <li class="nav-item">
+
+                        <button class="btn btn-danger" onclick="do_logout()">
+
+                            <i class="fa-solid fa-right-from-bracket"></i>
+
+                            Logout
+
+                        </button>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+    <!-- ================= HERO ================= -->
+
+    <div class="container mt-5">
+
+        <h1 class="display-5 fw-bold" style="color: white;">
+
+            Welcome,
+
+            <span class="text-primary">
+
+                Donor!
+
+            </span>
+
+            👋
+
+        </h1>
+
+        <p class="text-secondary">
+
+            Manage your donations and profile efficiently.
+
+        </p>
+
+        <div class="line"></div>
+
+    </div>
+
+    <!-- ================= DASHBOARD ================= -->
+
+    <div class="container mt-5">
+
+        <div class="row g-4">
+
+            <!-- Profile -->
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="card dashboard-card h-100">
+
+                    <div class="card-body text-center">
+
+                        <div class="icon-circle profile">
+
+                            <i class="fa-solid fa-user"></i>
+
+                        </div>
+
+                        <h3 class="mt-4">
+
+                            Profile
+
+                        </h3>
+
+                        <p>
+
+                            View and manage your profile information.
+
+                        </p>
+
+                        <a href="/Profile" id="profile"><i class="fa-regular fa-user profile-icon "></i>&nbsp; View
+                            Profile</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Medicine -->
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="card dashboard-card h-100">
+
+                    <div class="card-body text-center">
+
+                        <div class="icon-circle medicine">
+
+                            <i class="fa-solid fa-kit-medical"></i>
+
+                        </div>
+
+                        <h3 class="mt-4">
+
+                            Avail Medicine
+
+                        </h3>
+
+                        <p>
+
+                            Browse and request available medicines.
+
+                        </p>
+
+
+                        <a href="/med" id="med"><i class="fa-solid fa-capsules"></i>&nbsp;Avail Medicine</a>
+
+
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Equipment -->
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="card dashboard-card h-100">
+
+                    <div class="card-body text-center">
+
+                        <div class="icon-circle equipment">
+
+                            <i class="fa-solid fa-wheelchair"></i>
+
+                        </div>
+
+                        <h3 class="mt-4">
+
+                            Avail Equipment
+
+                        </h3>
+
+                        <p>
+
+                            Browse and request available equipment.
+
+                        </p>
+                        <a href="/equ" id="equ"> <i class="fa-solid fa-kit-medical"></i>&nbsp;Avail Equipment</a>
+
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ================= SECOND ROW ================= -->
+
+        <div class="row g-4 mt-2">
+
+            <!-- Medicine Manager -->
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="card dashboard-card h-100">
+
+                    <div class="card-body text-center">
+
+                        <div class="icon-circle manager">
+
+                            <i class="fa-solid fa-capsules"></i>
+
+                        </div>
+
+                        <h3 class="mt-4">
+
+                            Medicine Manager
+
+                        </h3>
+
+                        <p>
+
+                            Add, update and manage donated medicines.
+
+                        </p>
+
+                        <button type="button" class="btn btn-warning w-100" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal">
+                            Manage Medicine
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Equipment Manager -->
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="card dashboard-card h-100">
+
+                    <div class="card-body text-center">
+
+                        <div class="icon-circle cyan">
+
+                            <i class="fa-solid fa-truck-medical"></i>
+
+                        </div>
+
+                        <h3 class="mt-4">
+
+                            Equipment Manager
+
+                        </h3>
+
+                        <p>
+
+                            Add, update and manage donated equipment.
+
+                        </p>
+
+
+
+
+
+                        <button type="button" class="btn btn-info text-white w-100" data-bs-toggle="modal"
+                            data-bs-target="#staticBackdrop">
+                            Manage Equipment
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Settings -->
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="card dashboard-card h-100">
+
+                    <div class="card-body text-center">
+
+                        <div class="icon-circle setting">
+
+                            <i class="fa-solid fa-gear"></i>
+
+                        </div>
+
+                        <h3 class="mt-4">
+
+                            Settings
+
+                        </h3>
+
+                        <p>
+
+                            Change password and manage account settings.
+
+                        </p>
+
+                        <button class="btn btn-danger w-100" data-bs-toggle="modal" data-bs-target="#settings">
+
+                            Open Settings
+
+
+
+
+
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer
+        style="text-align: center; border-top: 1px solid #e2e8f0; padding-top: 20px; margin-top: 20px; color: #94a3b8; font-size: 14px;">
+        <p style="margin: 0;">&copy; 2026 LifeLink. All Rights Reserved. Designed & Developed by <strong
+                style="color: white;">Anshuman Nagpal</strong>.</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+
+
+    <!-- Button trigger modal -->
+
+
+
+    <div class="modal fade" id="exampleModal" tabindex="-1">
+
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+
+            <div class="modal-content">
+
+                <!-- Header -->
+
+                <div class="modal-header">
+
+                    <h4 class="modal-title">
+
+                        <i class="fa-solid fa-capsules"></i>
+
+                        Medicine Manager
+
+                    </h4>
+
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </button>
+
+                </div>
+
+                <!-- Body -->
+
+                <div class="modal-body">
+
+                    <div class="row mb-4">
+
+                        <div class="col-md-8">
+
+                            <label class="form-label fw-bold">
+
+                                Email ID
+
+                            </label>
+
+                            <div class="input-group">
+
+                                <span class="input-group-text">
+
+                                    <i class="fa-solid fa-envelope"></i>
+
+                                </span>
+
+                                <input type="email" class="form-control" placeholder="Enter Email" ng-model="email"
+                                    id="email" readonly>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-4 d-flex align-items-end">
+
+                            <button class="btn btn-primary w-100" ng-click="doShowMedicine(email)">
+
+                                <i class="fa-solid fa-download"></i>
+
+                                Get Data
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <div class="table-responsive">
+
+                        <table class="table table-bordered table-hover align-middle">
+
+                            <thead class="table-dark">
+
+                                <tr>
+
+                                    <th>Sr.No.</th>
+
+                                    <th>Email</th>
+
+                                    <th>Medicine</th>
+
+                                    <th>Expiry Date</th>
+
+                                    <th>Company</th>
+
+                                    <th>Packing</th>
+
+                                    <th>Quantity</th>
+
+                                    <th>Picture</th>
+
+                                    <th>Other Info</th>
+
+                                    <th>Action</th>
+
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+
+                                <tr ng-repeat="obj in medicineArray">
+
+                                    <td>{{$index+1}}</td>
+
+                                    <td>{{obj.email}}</td>
+
+                                    <td>{{obj.med_name}}</td>
+
+                                    <td>{{obj.date_of_expery| date:'dd-MMM-yyyy'}}</td>
+
+                                    <td>
+
+                                        <span class="badge bg-success">
+
+                                            {{obj.company}}
+
+                                        </span>
+
+                                    </td>
+
+                                    <td>{{obj.packing}}</td>
+
+                                    <td>{{obj.quty}}</td>
+
+                                    <td class="text-center">
+
+                                        <img ng-src="{{obj.pic_path}}" class="img-thumbnail rounded"
+                                            style="width:80px;height:80px;object-fit:cover;">
+
+                                    </td>
+
+                                    <td>{{obj.other_info}}</td>
+
+                                    <td>
+
+                                        <button class="btn btn-danger btn-sm w-100"
+                                            ng-click="doDeleteMedicine(obj.rid)">
+
+                                            <i class="fa-solid fa-trash"></i>
+
+                                            Delete
+
+                                        </button>
+
+                                    </td>
+
+                                </tr>
+
+                                <tr ng-if="!medicineArray || medicineArray.length==0">
+
+                                    <td colspan="10" class="text-center text-danger fw-bold">
+
+                                        No Medicine Found
+
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+                <!-- Footer -->
+
+                <div class="modal-footer">
+
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">
+
+                        Close
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+    <div class="modal fade" id="staticBackdrop" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+
+            <div class="modal-content">
+
+                <!-- Header -->
+                <div class="modal-header">
+
+                    <h4 class="modal-title" id="staticBackdropLabel">
+                        <i class="fa-solid fa-truck-medical"></i>
+                        Equipment Manager
+                    </h4>
+
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    </button>
+
+                </div>
+
+                <!-- Body -->
+                <div class="modal-body">
+
+                    <div class="row mb-4">
+
+                        <!-- Email -->
+                        <div class="col-md-8">
+
+                            <label class="form-label fw-bold">
+                                Email ID
+                            </label>
+
+                            <div class="input-group">
+
+                                <span class="input-group-text">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </span>
+
+                                <input type="email" class="form-control" placeholder="Enter Email ID" ng-model="email"
+                                    readonly>
+
+                            </div>
+
+                        </div>
+
+                        <!-- Get Data Button -->
+                        <div class="col-md-4 d-flex align-items-end">
+
+                            <button type="button" class="btn btn-info text-white w-100" ng-click="doShowequ(email)">
+
+                                <i class="fa-solid fa-download"></i>
+                                Get Data
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Equipment Table -->
+                    <div class="table-responsive">
+
+                        <table class="table table-bordered table-hover table-striped align-middle">
+
+                            <thead class="table-dark">
+
+                                <tr>
+                                    <th>Sr.No.</th>
+                                    <th>Email</th>
+                                    <th>Type</th>
+                                    <th>Condition</th>
+                                    <th>Status</th>
+                                    <th>Amount</th>
+                                    <th>Picture 1</th>
+                                    <th>Picture 2</th>
+                                    <th>Other Info</th>
+                                    <th>Action</th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+
+                                <tr ng-repeat="obj in equArray">
+
+                                    <td>{{$index + 1}}</td>
+
+                                    <td>{{obj.email}}</td>
+
+                                    <td>{{obj.type}}</td>
+
+                                    <td>{{obj.candation}}</td>
+
+                                    <td>
+                                        <span class="badge bg-success">
+                                            {{obj.status_}}
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        ₹ {{obj.Amount}}
+                                    </td>
+
+                                    <td class="text-center">
+
+                                        <img ng-src="{{obj.pic1_path}}" class="img-thumbnail" width="70" height="70">
+
+                                    </td>
+
+                                    <td class="text-center">
+
+                                        <img ng-src="{{obj.pic2_path}}" class="img-thumbnail" width="70" height="70">
+
+                                    </td>
+
+                                    <td>
+                                        {{obj.other_info}}
+                                    </td>
+
+                                    <td>
+
+                                        <button type="button" class="btn btn-danger btn-sm w-100"
+                                            ng-click="doDeleteequ(obj.rid)">
+
+                                            <i class="fa-solid fa-trash"></i>
+                                            Delete
+
+                                        </button>
+
+                                    </td>
+
+                                </tr>
+
+
+                                <!-- No Data -->
+                                <tr ng-if="!equArray || equArray.length == 0">
+
+                                    <td colspan="10" class="text-center text-danger fw-bold">
+
+                                        No Equipment Found
+
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Footer -->
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+
+                        Close
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="modal" id="settings" tabindex="-1">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: white;">
+                    <h4 class="modal-title"><i class="fa-solid fa-cog"></i> Settings</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <label for="txtemail" class="form-label"><b>Email Id</b></label>
+                    <input type="email" ng-model="email2" class="form-control mb-3" name="" id=""
+                        placeholder="Enter Email Id">
+
+                    <label for="txtemail" class="form-label"><b>Current Password</b></label>
+                    <input type="password" ng-model="pwd" class="form-control mb-3" name="" id=""
+                        placeholder="Enter current password">
+
+                    <label for="txtemail" class="form-label"><b>Password</b></label>
+                    <input type="password" ng-model="pwd2" class="form-control mb-3" name="" id=""
+                        placeholder="Enter new password">
+
+
+                    <center>
+                        <button type="button" ng-click="updatePassword();" class="btn btn-outline-danger mt-4 mb-3">
+                            🔍 Update Password
+                        </button>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

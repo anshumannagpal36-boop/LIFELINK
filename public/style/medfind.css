@@ -1,0 +1,18 @@
+body {
+    background: linear-gradient(135deg,
+            #09090B 0%,
+            #111827 40%,
+            #1E1B4B 100%);
+}
+.logo {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+
+}
+
+.navbar {
+    height: 80px;
+    padding: 0;
+    margin-left: -100px;
+}
