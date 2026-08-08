@@ -86,7 +86,7 @@ body {
 
 
 
-/* Responsive Grid for Services Section */
+/* --- OUR SERVICES SECTION ONLY --- */
 .card-section {
     padding: 20px 15px;
     width: 100%;
@@ -101,16 +101,14 @@ body {
     margin: 0 auto;
 }
 
-/* Service Card Styling for High Contrast and Mobile Visibility */
+/* Scoped selector: ONLY affects cards inside .card-grid */
 .card-grid .card {
     background-color: #1e293b !important;
-    /* Dark solid background for visibility */
     border: 1px solid #334155;
     border-radius: 16px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
@@ -118,7 +116,6 @@ body {
     padding: 0;
     background: transparent;
     border: none;
-    overflow: hidden;
 }
 
 .card-grid .card-header img {
@@ -137,21 +134,16 @@ body {
 
 .card-grid .card-title {
     color: #f8fafc !important;
-    /* Bright white text for readability */
     font-size: 1.25rem;
     font-weight: 600;
-    margin-bottom: 5px;
 }
 
 .card-grid .card-text {
     color: #cbd5e1 !important;
-    /* Readable light gray text */
     font-size: 0.95rem;
     line-height: 1.5;
-    margin-bottom: 10px;
 }
 
-/* Ensure inputs/selects are visible on mobile */
 .card-grid .form-control,
 .card-grid .form-select {
     background-color: #0f172a;
@@ -163,12 +155,49 @@ body {
     color: #94a3b8;
 }
 
-.card-grid .form-control:focus,
-.card-grid .form-select:focus {
-    background-color: #0f172a;
-    color: #ffffff;
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 0.25rem rgba(59, 130, 246, 0.25);
+
+/* --- KNOW US SECTION STYLING (Independent) --- */
+.know-us-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 40px 15px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.know-us-card {
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    padding: 20px;
+    max-width: 480px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.know-us-card img {
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 35%;
+    margin-bottom: 15px;
+}
+
+.know-us-card .card-title {
+    color: #94a3b8 !important;
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+}
+
+.know-us-card .card-text {
+    color: #cbd5e1 !important;
+    font-size: 0.95rem;
+    line-height: 1.6;
 }
 
 .form-control {
