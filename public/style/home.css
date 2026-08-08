@@ -234,3 +234,27 @@ body {
     height: auto;
     margin: 0 auto 1rem auto;
 }
+
+.form-control {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(148, 163, 184, 0.3);
+    color: white;
+    border-radius: 8px;
+    padding: 10px 12px;
+}
+
+.form-control::placeholder {
+    color: #94a3b8;
+}
+
+.form-control:focus {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border-color: #38BDF8;
+    box-shadow: 0 0 0 0.2rem rgba(56, 189, 248, 0.15);
+}
+
+.form-control option {
+    background: #111827;
+    color: white;
+}
